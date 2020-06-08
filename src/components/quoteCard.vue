@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p v-for="(quote, i) in quotesArray" :key="i" @click="deleteQ">{{ quote }}</p>
+        <p v-for="(quote, i) in quotesArray" :key="i" @click="deleteQ(i)">{{ quote }}</p>
     </div>
     
 </template>
@@ -12,8 +12,8 @@ export default {
         deleteQuoteFn: Function
     },
     methods: {
-        deleteQ(e){
-            this.deleteQuoteFn(e.target.value)
+        deleteQ(i){
+            this.deleteQuoteFn(i)
         }
     }
 }
@@ -30,5 +30,10 @@ export default {
         width: 200px;
         font-family: 'Courier New', Courier, monospace;
         margin: 20px;
+        cursor: pointer;
+    }
+
+    p:hover {
+        background-color: lightseagreen;
     }
 </style>

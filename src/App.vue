@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <appBar></appBar>
+        <appBar :quoteCount="quoteCount" :maxQuotes="maxQuotes"></appBar>
         <app-input :addQuoteFn="addQuote"></app-input>
         <app-card :quotesArray="quotes" v-if="quotes.length > 0" :deleteQuoteFn="deleteQuote"></app-card>
         <app-footer></app-footer>
@@ -16,7 +16,9 @@
     export default {
         data: function(){
             return {
-                quotes: []
+                quotes: [],
+                maxQuotes: 10,
+                quoteCount: 0
             }
         },
         components: {
@@ -27,10 +29,15 @@
         },
         methods: {
             addQuote(q){
+                if(this.quotes.length >= this.maxQuotes){
+                    return alert("please delete a quote")
+                }
                 this.quotes.push(q)
+                this.quoteCount++
             },
-            deleteQuote(q){
-                this.quotes.pop(q)
+            deleteQuote(i){
+                this.quotes.splice(i,1)
+                this.quoteCount--
             }
         }
     }
