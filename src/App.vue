@@ -4,6 +4,12 @@
         <app-input :addQuoteFn="addQuote"></app-input>
         <app-card :quotesArray="quotes" v-if="quotes.length > 0" :deleteQuoteFn="deleteQuote"></app-card>
         <app-footer></app-footer>
+        <hr>
+        <hr>
+        <hr>
+        <hr>
+        <hr>
+        <button @click="printSvg">print file</button>
     </div>
 </template>
 
@@ -12,6 +18,7 @@
     import Input from "./components/quoteInput.vue";
     import Card from "./components/quoteCard.vue";
     import Footer from "./components/quotesFooter.vue";
+    import axios from 'axios'
 
     export default {
         data: function(){
@@ -38,6 +45,12 @@
             deleteQuote(i){
                 this.quotes.splice(i,1)
                 this.quoteCount--
+            },
+            printSvg(){
+                axios.post("localhost:1337/svgToPdf")
+                .then(res => {
+                    console.log(res)
+                })
             }
         }
     }
